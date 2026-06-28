@@ -1,0 +1,132 @@
+/* ============================================================
+   pages/login.css — Login Page
+   Standalone page — no sidebar, full-screen centered card.
+   ============================================================ */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-base);
+  padding: var(--sp-4);
+  /* subtle radial glow behind the card */
+  background-image: radial-gradient(
+    ellipse 60% 40% at 50% 50%,
+    rgba(99, 102, 241, 0.08),
+    transparent
+  );
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-2xl);
+  padding: var(--sp-10) var(--sp-8);
+  box-shadow: var(--shadow-xl);
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+
+.login-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: var(--text-lg);
+}
+
+.login-logo-name {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.login-logo-tagline {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.login-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-1);
+}
+
+.login-subtitle {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-8);
+}
+
+/* ---- Demo banner ---- */
+.demo-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--accent-light);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-6);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.demo-banner-icon {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ---- Divider with text ---- */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: var(--sp-5) 0;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-base);
+}
+
+.login-divider-text {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---- Status indicator ---- */
+.login-status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-6);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  border: 1px solid var(--border-base);
+  color: var(--text-muted);
+}
+
+.login-status.ok   { background: var(--success-light); color: var(--success); border-color: var(--success-border); }
+.login-status.fail { background: var(--danger-light);  color: var(--danger);  border-color: var(--danger-border); }

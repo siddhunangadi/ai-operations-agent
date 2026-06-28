@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Operations Agent — Dashboard</title>
+  <meta name="description" content="AI Operations Agent — Autonomous AI Cost, Usage, Governance & Optimization Platform" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Design System CSS (order matters) -->
+  <link rel="stylesheet" href="static/css/variables.css" />
+  <link rel="stylesheet" href="static/css/reset.css" />
+  <link rel="stylesheet" href="static/css/base.css" />
+  <link rel="stylesheet" href="static/css/layout.css" />
+  <link rel="stylesheet" href="static/css/utilities.css" />
+
+  <!-- Component CSS -->
+  <link rel="stylesheet" href="static/css/components/sidebar.css" />
+  <link rel="stylesheet" href="static/css/components/navbar.css" />
+  <link rel="stylesheet" href="static/css/components/card.css" />
+  <link rel="stylesheet" href="static/css/components/badge.css" />
+  <link rel="stylesheet" href="static/css/components/table.css" />
+  <link rel="stylesheet" href="static/css/components/spinner.css" />
+  <link rel="stylesheet" href="static/css/components/toast.css" />
+  <link rel="stylesheet" href="static/css/components/form.css" />
+  <link rel="stylesheet" href="static/css/components/modal.css" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="static/css/pages/chat.css" />
+  <link rel="stylesheet" href="static/css/pages/analytics.css" />
+
+  <!-- Responsive (must be last) -->
+  <link rel="stylesheet" href="static/css/responsive.css" />
+</head>
+<body>
+
+<!-- App Shell: Sidebar + Main Area -->
+<div class="app-shell">
+
+  <!-- ======== SIDEBAR ======== -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Rendered by sidebar.js -->
+  </aside>
+
+  <!-- ======== MAIN AREA ======== -->
+  <div class="main-area">
+
+    <!-- Top Navbar -->
+    <header class="navbar" id="navbar">
+      <!-- Rendered by navbar.js -->
+    </header>
+
+    <!-- Page Content (router injects pages here) -->
+    <main class="page-content" id="content">
+      <!-- Initial loading state until router fires -->
+      <div class="loading-state">
+        <div class="spinner spinner-lg"></div>
+        <p class="loading-text">Starting AI Operations Agent...</p>
+      </div>
+    </main>
+
+  </div><!-- /main-area -->
+</div><!-- /app-shell -->
+
+<!-- ======== App Entry Point ======== -->
+<script type="module">
+  // Import and run the layout + router
+  // This is the only script tag needed — all modules import from here
+  import { renderSidebar } from './static/js/layout/sidebar.js';
+  import { renderNavbar }  from './static/js/layout/navbar.js';
+  import { initRouter }    from './static/js/core/router.js';
+
+  // 1. Render the sidebar (nav links, logo, user placeholder)
+  renderSidebar();
+
+  // 2. Render the navbar (page title, backend status, logout)
+  renderNavbar();
+
+  // 3. Start the router (reads URL hash, loads correct page)
+  initRouter();
+</script>
+
+</body>
+</html>

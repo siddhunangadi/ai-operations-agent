@@ -1,0 +1,52 @@
+<!-- pages/chat.html — AI Chat Page Fragment -->
+<!-- Loaded into #content by the router. JS: pages/chat.js -->
+
+<div class="page-header">
+  <h1>AI Chat</h1>
+  <p>Ask the autonomous agent anything about your AI costs, usage, and optimization.</p>
+</div>
+
+<div class="chat-layout">
+
+  <!-- Welcome Screen (shown when no messages yet) -->
+  <div class="chat-welcome" id="chat-welcome">
+    <div class="chat-welcome-icon">🤖</div>
+    <h2 style="font-size:var(--text-xl)">AI Operations Assistant</h2>
+    <p style="max-width:460px;text-align:center">
+      Ask me about your AI costs, usage patterns, provider performance, or
+      recommendations to optimize your spending.
+    </p>
+    <div class="chat-suggestion-chips">
+      <div class="suggestion-chip">What is my current monthly spend?</div>
+      <div class="suggestion-chip">Which provider is most cost-efficient?</div>
+      <div class="suggestion-chip">Show me usage trends for this week</div>
+      <div class="suggestion-chip">How can I reduce my AI costs?</div>
+      <div class="suggestion-chip">What actions has the agent taken recently?</div>
+    </div>
+  </div>
+
+  <!-- Message List (hidden until first message) -->
+  <div class="chat-messages" id="chat-messages" style="display:none">
+    <!-- Messages are appended here by chat.js -->
+  </div>
+
+  <!-- Input Area (always visible) -->
+  <div class="chat-input-area">
+    <div class="chat-input-wrapper">
+      <textarea
+        class="chat-input"
+        id="chat-input"
+        placeholder="Ask the agent anything... (Enter to send, Shift+Enter for new line)"
+        rows="1"
+        aria-label="Chat message input"
+      ></textarea>
+      <button class="chat-send-btn" id="chat-send" aria-label="Send message">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+    <div style="margin-top:var(--sp-2);font-size:var(--text-xs);color:var(--text-muted);text-align:center">
+      Powered by LangGraph agents · Responses stream live via SSE
+    </div>
+  </div>
+
+</div>

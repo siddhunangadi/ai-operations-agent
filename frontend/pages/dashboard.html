@@ -1,0 +1,107 @@
+<!-- pages/dashboard.html — Dashboard Page Fragment -->
+<!-- Loaded into #content by the router. JS: pages/dashboard.js -->
+
+<div class="page-header">
+  <h1>Dashboard</h1>
+  <p>Real-time overview of your AI usage, costs, and system health.</p>
+</div>
+
+<!-- KPI Metric Grid — populated by dashboard.js renderKPIs() -->
+<div class="grid-4 section" id="kpi-grid">
+  <!-- Skeleton placeholders shown while loading -->
+</div>
+
+<!-- Charts + Health Row -->
+<div class="charts-grid section">
+  <!-- Recommendations preview -->
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <div class="chart-card-title">Top Recommendations</div>
+      <a href="#recommendations" class="btn btn-sm btn-ghost">View all</a>
+    </div>
+    <div id="rec-list">
+      <!-- Populated by dashboard.js renderRecommendations() -->
+    </div>
+  </div>
+
+  <!-- Health Score -->
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <div class="chart-card-title">System Health</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:var(--sp-4);padding:var(--sp-4) 0">
+      <div style="font-size:var(--text-4xl);font-weight:var(--weight-bold);color:var(--text-primary)" id="health-score-value">—%</div>
+      <div style="width:100%">
+        <div class="progress-bar-wrapper" style="height:10px">
+          <div class="progress-bar-fill success" id="health-score-bar" style="width:0%;transition:width 1s ease"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--sp-2)">
+          <span>0%</span><span>100%</span>
+        </div>
+      </div>
+      <a href="#world-model" class="btn btn-sm btn-secondary">View World Model</a>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Actions Table -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Recent Agent Actions</div>
+      <div class="section-subtitle">Last actions taken by the autonomous agent</div>
+    </div>
+    <a href="#actions" class="btn btn-sm btn-secondary">View all actions</a>
+  </div>
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Status</th>
+          <th>Description</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="recent-actions-body">
+        <!-- Populated by dashboard.js -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Quick Links -->
+<div class="grid-4">
+  <a href="#chat" class="kpi-card" style="text-decoration:none;cursor:pointer">
+    <div class="kpi-card-top">
+      <span class="kpi-label">AI Assistant</span>
+      <div class="kpi-icon indigo"><i class="fa-solid fa-comments"></i></div>
+    </div>
+    <div class="kpi-value" style="font-size:var(--text-lg)">Chat</div>
+    <div class="kpi-trend flat" style="color:var(--accent)">Ask the agent anything →</div>
+  </a>
+  <a href="#usage" class="kpi-card" style="text-decoration:none;cursor:pointer">
+    <div class="kpi-card-top">
+      <span class="kpi-label">Analytics</span>
+      <div class="kpi-icon info"><i class="fa-solid fa-chart-bar"></i></div>
+    </div>
+    <div class="kpi-value" style="font-size:var(--text-lg)">Usage</div>
+    <div class="kpi-trend flat" style="color:var(--info)">View usage analytics →</div>
+  </a>
+  <a href="#cost" class="kpi-card" style="text-decoration:none;cursor:pointer">
+    <div class="kpi-card-top">
+      <span class="kpi-label">Finance</span>
+      <div class="kpi-icon warning"><i class="fa-solid fa-dollar-sign"></i></div>
+    </div>
+    <div class="kpi-value" style="font-size:var(--text-lg)">Costs</div>
+    <div class="kpi-trend flat" style="color:var(--warning)">View cost breakdown →</div>
+  </a>
+  <a href="#world-model" class="kpi-card" style="text-decoration:none;cursor:pointer">
+    <div class="kpi-card-top">
+      <span class="kpi-label">Intelligence</span>
+      <div class="kpi-icon violet"><i class="fa-solid fa-brain"></i></div>
+    </div>
+    <div class="kpi-value" style="font-size:var(--text-lg)">World Model</div>
+    <div class="kpi-trend flat" style="color:var(--accent-2)">View agent state →</div>
+  </a>
+</div>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — AI Operations Agent</title>
+  <meta name="description" content="Sign in to AI Operations Agent — Autonomous AI Cost, Usage & Governance Platform" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="static/css/variables.css" />
+  <link rel="stylesheet" href="static/css/reset.css" />
+  <link rel="stylesheet" href="static/css/base.css" />
+  <link rel="stylesheet" href="static/css/components/spinner.css" />
+  <link rel="stylesheet" href="static/css/components/form.css" />
+  <link rel="stylesheet" href="static/css/components/toast.css" />
+  <link rel="stylesheet" href="static/css/pages/login.css" />
+</head>
+<body>
+
+<main class="login-page">
+  <div class="login-card">
+
+    <!-- Logo -->
+    <div class="login-logo">
+      <div class="login-logo-icon">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <div>
+        <div class="login-logo-name">AI Operations Agent</div>
+        <div class="login-logo-tagline">Autonomous AI Cost &amp; Governance Platform</div>
+      </div>
+    </div>
+
+    <h1 class="login-title">Welcome back</h1>
+    <p class="login-subtitle">Sign in to your account to continue</p>
+
+
+
+    <!-- Email / Password form -->
+    <form id="login-form" novalidate>
+      <!-- Full Name (Signup mode only) -->
+      <div class="form-group" id="fullname-group" style="display:none">
+        <label class="form-label" for="fullname">Full name</label>
+        <input class="input" id="fullname" type="text" placeholder="John Doe" autocomplete="name" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email address</label>
+        <input class="input" id="email" type="email" placeholder="admin@example.com" autocomplete="email" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input class="input" id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+
+      <div id="login-error" style="display:none;color:var(--danger);font-size:var(--text-sm);margin-bottom:var(--sp-4)"></div>
+
+      <button class="btn btn-secondary btn-full" type="submit" id="login-btn">
+        Sign in
+      </button>
+
+      <div style="text-align:center;margin-top:var(--sp-4);font-size:var(--text-sm)">
+        <a href="#" id="toggle-mode-btn" style="color:var(--accent);text-decoration:none">Don't have an account? Sign up</a>
+      </div>
+    </form>
+
+    <!-- Backend connectivity status -->
+    <div class="login-status" id="backend-status">
+      <div class="spinner spinner-sm"></div>
+      <span>Checking backend connectivity...</span>
+    </div>
+
+  </div>
+</main>
+
+<script type="module">
+  import { API_BASE } from './static/js/config.js';
+  import { saveToken, saveUser } from './static/js/core/auth.js';
+  import { notify } from './static/js/core/notifications.js';
+
+  // Toggle Login/Signup Modes
+  let isSignUpMode = false;
+  const toggleBtn = document.getElementById('toggle-mode-btn');
+  const fullnameGroup = document.getElementById('fullname-group');
+  const loginTitle = document.querySelector('.login-title');
+  const loginSubtitle = document.querySelector('.login-subtitle');
+  const loginBtn = document.getElementById('login-btn');
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    isSignUpMode = !isSignUpMode;
+    if (isSignUpMode) {
+      fullnameGroup.style.display = 'block';
+      loginTitle.textContent = 'Create an account';
+      loginSubtitle.textContent = 'Sign up with email to continue';
+      loginBtn.textContent = 'Sign up';
+      toggleBtn.textContent = 'Already have an account? Sign in';
+    } else {
+      fullnameGroup.style.display = 'none';
+      loginTitle.textContent = 'Welcome back';
+      loginSubtitle.textContent = 'Sign in to your account to continue';
+      loginBtn.textContent = 'Sign in';
+      toggleBtn.textContent = "Don't have an account? Sign up";
+    }
+    document.getElementById('login-error').style.display = 'none';
+  });
+
+  // Check if backend is reachable on page load
+  async function checkBackend() {
+    const status = document.getElementById('backend-status');
+    try {
+      const res = await fetch('/health', { signal: AbortSignal.timeout(5000) });
+      if (res.ok) {
+        status.className = 'login-status ok';
+        status.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span>Backend is online</span>';
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+    } catch {
+      status.className = 'login-status fail';
+      status.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> <span>Backend is offline — start Docker first</span>';
+    }
+  }
+
+
+
+  // Email/password form submission
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const errorEl  = document.getElementById('login-error');
+    const btn      = document.getElementById('login-btn');
+
+    if (!email || !password) {
+      errorEl.textContent = 'Please enter your email and password.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    let payload = { email, password };
+
+    if (isSignUpMode) {
+      const fullname = document.getElementById('fullname').value.trim();
+      if (!fullname) {
+        errorEl.textContent = 'Please enter your full name.';
+        errorEl.style.display = 'block';
+        return;
+      }
+      payload.full_name = fullname;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+    errorEl.style.display = 'none';
+
+    try {
+      const endpoint = isSignUpMode ? '/auth/signup' : '/auth/login';
+      const res = await fetch(`${API_BASE}${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.detail || 'Authentication failed');
+      }
+
+      if (data.session && data.session.access_token) {
+        saveToken(data.session.access_token);
+        saveUser(data.user);
+        window.location.href = '/index.html#dashboard';
+      } else {
+        throw new Error('Authentication succeeded but returned no session token.');
+      }
+    } catch (err) {
+      errorEl.textContent = err.message || 'Authentication failed. Please try again.';
+      errorEl.style.display = 'block';
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  });
+
+  // Run backend check on load
+  checkBackend();
+</script>
+</body>
+</html>

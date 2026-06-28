@@ -1,0 +1,118 @@
+/* ============================================================
+   responsive.css — Mobile & Tablet Breakpoints
+   Collapses sidebar and adjusts grid layouts on small screens.
+   ============================================================ */
+
+/* ---- Tablet: < 1024px ---- */
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-with-aside {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---- Mobile: < 768px ---- */
+@media (max-width: 768px) {
+  /* Hide sidebar, show only hamburger */
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-area {
+    margin-left: 0;
+  }
+
+  .page-content {
+    padding: var(--sp-5);
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-auto {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kpi-value {
+    font-size: var(--text-xl);
+  }
+
+  /* Hamburger button (shown only on mobile) */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide some navbar elements */
+  .backend-status {
+    display: none;
+  }
+}
+
+/* ---- Desktop: > 768px ---- */
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .sidebar-overlay { display: none; }
+}
+
+/* ---- Hamburger button ---- */
+.hamburger {
+  width: 36px;
+  height: 36px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+
+.hamburger:hover { background: var(--bg-surface-2); }
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: transform var(--t-base);
+}
+
+/* ---- Sidebar overlay on mobile ---- */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: calc(var(--z-sidebar) - 1);
+  backdrop-filter: blur(2px);
+}
+
+/* ---- Small screens: chat ---- */
+@media (max-width: 600px) {
+  .chat-layout {
+    height: calc(100vh - var(--header-h) - var(--sp-5) * 2);
+  }
+
+  .chat-welcome {
+    padding: var(--sp-6);
+  }
+
+  .chat-suggestion-chips {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,145 @@
+/* ============================================================
+   components/spinner.css — Loading States
+   Includes spinner animation, skeleton loaders, empty states, error states
+   ============================================================ */
+
+/* ---- Spinner ---- */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-base);
+  border-top-color: var(--accent);
+  border-radius: var(--radius-full);
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner-sm { width: 14px; height: 14px; }
+.spinner-lg { width: 32px; height: 32px; border-width: 3px; }
+
+/* ---- Centered loader ---- */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-16) var(--sp-8);
+  text-align: center;
+}
+
+.loading-state .spinner {
+  width: 36px;
+  height: 36px;
+  border-width: 3px;
+}
+
+.loading-text {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ---- Skeleton loader ---- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface-2) 25%,
+    var(--bg-surface-3) 50%,
+    var(--bg-surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-text     { height: 1em; margin-bottom: var(--sp-2); }
+.skeleton-title    { height: 1.5em; width: 60%; margin-bottom: var(--sp-4); }
+.skeleton-card     { height: 100px; width: 100%; }
+.skeleton-chart    { height: 200px; width: 100%; }
+
+/* ---- Empty state ---- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding: var(--sp-16) var(--sp-8);
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 2.5rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.empty-state-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+}
+
+.empty-state-text {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  max-width: 320px;
+}
+
+/* ---- Error state ---- */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-10) var(--sp-8);
+  text-align: center;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius-lg);
+}
+
+.error-state-icon {
+  font-size: 2rem;
+  color: var(--danger);
+}
+
+.error-state-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--danger);
+}
+
+.error-state-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* ---- Animations ---- */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-in     { animation: fadeIn var(--t-base) forwards; }
+.animate-down   { animation: slideDown var(--t-fast) forwards; }
+.animate-pulse  { animation: pulse 2s ease infinite; }

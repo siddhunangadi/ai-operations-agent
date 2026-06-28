@@ -1,0 +1,117 @@
+/* ============================================================
+   variables.css — Design Tokens
+   Single source of truth for ALL visual values.
+   Change a value here → whole app updates.
+   ============================================================ */
+
+:root {
+  /* ---- Backgrounds ---- */
+  --bg-base:       #0a0a0f;
+  --bg-surface:    #111118;
+  --bg-surface-2:  #1a1a24;
+  --bg-surface-3:  #22222f;
+  --bg-overlay:    rgba(10, 10, 15, 0.85);
+
+  /* ---- Borders ---- */
+  --border-subtle: #1a1a26;
+  --border-base:   #2a2a3a;
+  --border-strong: #3a3a52;
+
+  /* ---- Accent: Indigo ---- */
+  --accent:        #6366f1;
+  --accent-hover:  #5254cc;
+  --accent-muted:  #4f52b0;
+  --accent-light:  rgba(99, 102, 241, 0.12);
+  --accent-glow:   rgba(99, 102, 241, 0.25);
+
+  /* ---- Accent 2: Violet ---- */
+  --accent-2:      #8b5cf6;
+  --accent-2-light:rgba(139, 92, 246, 0.12);
+
+  /* ---- Semantic ---- */
+  --success:       #10b981;
+  --success-light: rgba(16, 185, 129, 0.12);
+  --success-border:rgba(16, 185, 129, 0.3);
+
+  --warning:       #f59e0b;
+  --warning-light: rgba(245, 158, 11, 0.12);
+  --warning-border:rgba(245, 158, 11, 0.3);
+
+  --danger:        #ef4444;
+  --danger-light:  rgba(239, 68, 68, 0.12);
+  --danger-border: rgba(239, 68, 68, 0.3);
+
+  --info:          #3b82f6;
+  --info-light:    rgba(59, 130, 246, 0.12);
+  --info-border:   rgba(59, 130, 246, 0.3);
+
+  /* ---- Text ---- */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+  --text-disabled:  #334155;
+
+  /* ---- Typography ---- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ---- Spacing (4px base) ---- */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+
+  /* ---- Border Radius ---- */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:     0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:     0 8px 32px rgba(0,0,0,0.5);
+  --shadow-xl:     0 20px 60px rgba(0,0,0,0.6);
+  --shadow-accent: 0 0 0 1px var(--accent), 0 4px 24px var(--accent-glow);
+
+  /* ---- Transitions ---- */
+  --t-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-base:   250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-slow:   400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Layout ---- */
+  --sidebar-w:     240px;
+  --header-h:      56px;
+  --content-max:   1400px;
+  --page-padding:  var(--sp-8);
+
+  /* ---- Z-Index ---- */
+  --z-sidebar:  100;
+  --z-header:   200;
+  --z-dropdown: 300;
+  --z-modal:    400;
+  --z-toast:    500;
+}
