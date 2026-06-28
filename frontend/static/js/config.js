@@ -7,7 +7,7 @@
 // The base URL for all FastAPI API calls.
 // In production with Nginx, this becomes '/api/v1' (same-origin proxy).
 // In local dev (without Nginx), it points to the FastAPI server directly.
-export const API_BASE = '/api/v1';
+export const API_BASE = 'https://ai-operations-agent-fyxs.onrender.com/api/v1';
 
 // App information shown in the UI
 export const APP_NAME = 'AI Operations Agent';
